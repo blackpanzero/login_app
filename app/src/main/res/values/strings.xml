@@ -1,4 +1,5 @@
 <resources>
     <string name="app_name">Login app 2</string>
     <string name="prompt_email">Email</string>
+    <string name="prompt_password">Password</string>
 </resources>
