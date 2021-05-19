@@ -22,6 +22,15 @@
             android:src="@drawable/safaricom"
             android:layout_gravity="center"/>
 
+        <EditText
+            android:id="@+id/email"
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/edit_text_height"
+            android:layout_marginTop="@dimen/top_margin"
+            android:hint="@string/prompt_email"
+            android:inputType="textEmailAddress"
+            android:paddingStart="@dimen/padding"/>
+
 
 
     </LinearLayout>
