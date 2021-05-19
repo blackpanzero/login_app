@@ -2,11 +2,14 @@ package com.example.loginapp2;
 
 import androidx.appcompat.app.AppCompatActivity;
 
+import android.graphics.Color;
 import android.os.Bundle;
+import android.util.Patterns;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.TextView;
+import android.widget.Toast;
 
 public class MainActivity extends AppCompatActivity {
 
@@ -36,8 +39,52 @@ public class MainActivity extends AppCompatActivity {
         });
 
 
+
     }
 
+    public void SetValidation() {
 
-    
+
+
+
+        // Check for a valid email address.
+        if (email.getText().toString().isEmpty()) {
+            email.setError(getResources().getString(R.string.email_error));
+            isEmailValid = false;
+        } else if (!Patterns.EMAIL_ADDRESS.matcher(email.getText().toString()).matches()) {
+            email.setError(getResources().getString(R.string.error_invalid_email));
+            isEmailValid = false;
+
+        }
+        // Check for a valid password.
+        else if (mPassword.getText().toString().isEmpty()) {
+            mPassword.setError(getResources().getString(R.string.password_error));
+
+        } else if (mPassword.getText().length() < 6) {
+            mPassword.setError(getResources().getString(R.string.error_invalid_password));
+
+        }
+        else if(email.getText().toString().equals("admin@example.com") && mPassword.getText().toString().equals("password")) {
+            Toast.makeText(getApplicationContext(),
+                    "Redirecting...",Toast.LENGTH_SHORT).show();
+        }
+
+        else  {
+            Toast.makeText(getApplicationContext(), "Wrong Credentials",Toast.LENGTH_SHORT).show();
+            text.setVisibility(View.VISIBLE);
+            text.setBackgroundColor(Color.RED);
+            counter--;
+            text.setText("Attempts Left: " + Integer.toString(counter));
+
+            if (counter == 0) {
+                login.setBackgroundColor(Color.GRAY);
+                login.setEnabled(false);
+            }
+
+        }
+
+
+
+
+    }
 }
