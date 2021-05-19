@@ -4,7 +4,10 @@ import androidx.appcompat.app.AppCompatActivity;
 
 import android.graphics.Color;
 import android.os.Bundle;
+import android.text.method.HideReturnsTransformationMethod;
+import android.text.method.PasswordTransformationMethod;
 import android.util.Patterns;
+import android.view.MotionEvent;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
@@ -38,7 +41,33 @@ public class MainActivity extends AppCompatActivity {
             }
         });
 
-
+        mPassword.setOnTouchListener(new View.OnTouchListener() {
+            @Override
+            public boolean onTouch(View v, MotionEvent event) {
+                final int RIGHT = 2;
+                if (event.getAction() == MotionEvent.ACTION_UP) {
+                    if (event.getRawX() >= (mPassword.getRight() - mPassword.getCompoundDrawables()[RIGHT].getBounds().width())) {
+                        int selection = mPassword.getSelectionEnd();
+                        if (isPasswordVisible) {
+                            // set drawable image
+                            mPassword.setCompoundDrawablesWithIntrinsicBounds(0, 0, R.drawable.ic_visibility_off_black_24dp, 0);
+                            // hide Password
+                            mPassword.setTransformationMethod(PasswordTransformationMethod.getInstance());
+                            isPasswordVisible = false;
+                        } else  {
+                            // set drawable image
+                            mPassword.setCompoundDrawablesWithIntrinsicBounds(0, 0, R.drawable.ic_visibility_black_24dp, 0);
+                            // show Password
+                            mPassword.setTransformationMethod(HideReturnsTransformationMethod.getInstance());
+                            isPasswordVisible = true;
+                        }
+                        mPassword.setSelection(selection);
+                        return true;
+                    }
+                }
+                return false;
+            }
+        });
 
     }
 
