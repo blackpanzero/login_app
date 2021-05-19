@@ -42,6 +42,16 @@
             android:longClickable="false"
             android:paddingStart="@dimen/padding"/>
 
+        <Button
+            android:id="@+id/login"
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/btn_height"
+            android:layout_margin="@dimen/btn_margin"
+            android:background="@drawable/button_gradient"
+            android:text="@string/login"
+            android:textColor="@android:color/white"
+            android:textSize="@dimen/text_size"/>
+
 
 
     </LinearLayout>
